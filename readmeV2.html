@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stereo-Talker: Audio-driven 3D Human Synthesis with Prior-Guided Mixture-of-Experts | Project Page</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+        }
+        
+        .authors {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .affiliations {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        
+        .paper-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-pdf {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-pdf:hover {
+            background-color: #c0392b;
+        }
+        
+        .abstract {
+            background-color: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .teaser {
+            width: 100%;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .teaser img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .video-group {
+            margin: 40px 0;
+        }
+        
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .video-item {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        
+        .video-container {
+            width: 100%;
+            height: auto;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            border: none;
+            display: block;
+            background-color: #000;
+        }
+        
+        .video-caption {
+            padding: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .citation {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-left: 4px solid var(--secondary-color);
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin: 30px 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .paper-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .video-container video {
+                max-height: 300px;
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Stereo-Talker: Audio-driven 3D Human Synthesis with Prior-Guided Mixture-of-Experts</h1>
+            <div class="authors">
+                <!-- Xiang Deng<sup>1</sup>, Youxin Pang<sup>2</sup>, Xiaochen Zhao<sup>1</sup>, Chao Xu<sup>1</sup>, Lizhen Wang<sup>1</sup>, Hongjiang XiaoChao Xu<sup>1</sup>, 
+                Shi Yan<sup>1</sup>, Hongwen Zhang<sup>1</sup>, and Yebin Liu<sup>1</sup> -->
+                Xiang Deng, Youxin Pang, Xiaochen Zhao, Chao Xu, Lizhen Wang, Hongjiang Xiao, Chao Xu, 
+                Shi Yan, Hongwen Zhang, and Yebin Liu
+            </div>
+            <div class="paper-info">
+                <a href="#" class="btn btn-pdf">Paper (PDF)</a>
+                <a href="#" class="btn">Code</a>
+                <a href="#" class="btn">Dataset</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="abstract">
+            <h2>Abstract</h2>
+            <div class="abstract">
+                <p>This paper introduces Stereo-Talker, a novel one-shot audio-driven human video synthesis system that generates 3D talking videos with precise lip synchronization, expressive body gestures, temporally consistent photo-realistic quality, and continuous viewpoint control. The process follows a two-stage approach. In the first stage, the system maps audio input to high-fidelity motion sequences, encompassing upper-body gestures and facial expressions. To enrich motion diversity and authenticity, large language model (LLM) priors are integrated with text-aligned semantic audio features, leveraging LLMs' cross-modal generalization power to enhance motion quality. In the second stage, we improve diffusion-based video generation models by incorporating a prior-guided Mixture-of-Experts (MoE) mechanism: a view-guided MoE focuses on view-specific attributes, while a mask-guided MoE enhances region-based rendering stability. Additionally, a mask prediction module is devised to derive human masks from motion data, enhancing the stability and accuracy of masks and enabling mask guiding during inference. We also introduce a comprehensive human video dataset with 2,203 identities, covering diverse body gestures and detailed annotations, facilitating broad generalization. The code, data, and pre-trained models will be released for research purposes.</p>
+                
+            </div>
+        </section>
+        
+        <section id="teaser">
+            <div class="teaser">
+                <img src="img/teasor3.png" alt="Method Teaser Figure">
+                <p>Figure 1: We present a framework designed for the synthesis of human videos driven by audio inputs. Given a single reference image in the first column and an arbitrary audio clip, our methodology produces high-fidelity photo-realistic video outputs depicting the subject engaged in realistic conversation. The synthesized frames illustrate our achievement of accurate lip synchronization, spontaneous eye blinking, and vivid body gestures, collectively pushing the boundaries of audio-driven human synthesis to new heights.</p>
+            </div>
+        </section>
+        
+        
+        <section id="method">
+            <h2>Method</h2>
+            <!-- <p>Our framework consists of three main components:</p>
+            <ol>
+                <li><strong>Audio Feature Extraction:</strong> We process the input audio signal to extract both low-level acoustic features and high-level semantic features that are relevant for human motion generation.</li>
+                <li><strong>Motion Generation Network:</strong> A temporal-aware generator translates the audio features into a sequence of human poses while maintaining natural motion dynamics and audio-visual synchronization.</li>
+                <li><strong>Neural Rendering Module:</strong> A video generator synthesizes realistic human appearances conditioned on the generated poses and the reference image, ensuring temporal coherence and visual quality.</li>
+            </ol> -->
+            
+            <div class="teaser">
+                <img src="img/overview16.png" alt="Method Architecture">
+                <p>Figure 2: The overall framework of Stereo-Talker. Given a single portrait image with its driven audio, we first convert the audio input to human motion sequences based on large language model priors. Then, we render these motions to high-fidelity human videos through a U-net backbone, where a view Mixture-of-Experts (MoE) module and a mask MoE module improve the rendering stability. Notably, we train a mask generation network to predict the human mask at inference time.</p>
+            </div>
+        </section>
+        
+        <section id="results">
+            <h2>Results</h2>
+        
+            
+            <div class="video-group">
+                <h3>1. 3D Driven Results</h3>
+                <!-- <p>Full 3D body motion generation from audio, including complex dance movements and full-body gestures.</p> -->
+                
+                <div class="video-list">
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/talking/mergea.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Example 1:</strong> 3D Talking Video with Rotating View.
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/view/merge1.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Example 2:</strong> 3D Multi View Generation.
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/rot/merge2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Example 3:</strong> 3D Static Consistency.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            
+            <div class="video-group">
+                <h3>2. Comparison Experiments</h3>
+                <p>Comparison with state-of-the-art methods demonstrating our superior performance in motion quality and audio-visual synchronization.</p>
+                
+                <div class="video-list">
+                    <div class="video-item">
+                        
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/view_compare/a.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/view_compare/b.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Comparison 1:</strong> Our method vs. Human4Dit - 3D Multi View Generation.
+                        </div>
+                    </div>
+                    
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/rot_motion_compare/a.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/3d/rot_motion_compare/b.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Comparison 2:</strong> Our method vs. Human4Dit - 3D Rotation View Generation.
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/s2g/s2gc.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Comparison 3:</strong> Our method vs. S2G - 2D Talking Generation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-group">
+                <h3>3. More Results</h3>
+                <!-- <p>Full 3D body motion generation from audio, including complex dance movements and full-body gestures.</p> -->
+                
+                <div class="video-list">
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/diversity/mergea0.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Example 1:</strong> 2D Diverse Motion Generation.
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="video/face2/mergea.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-caption">
+                            <strong>Example 2:</strong> 2D Talking Head Generation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="citation">
+            <h2>Citation</h2>
+            <div class="citation">
+@article{deng2024stereo,
+  title={Stereo-Talker: Audio-driven 3D Human Synthesis with Prior-Guided Mixture-of-Experts},
+  author={Deng, Xiang and Pang, Youxin and Zhao, Xiaochen and Xu, Chao and Wang, Lizhen and Xiao, Hongjiang and Yan, Shi and Zhang, Hongwen and Liu, Yebin},
+  journal={arXiv preprint arXiv:2410.23836},
+  year={2024}
+}
+            </div>
+        </section>
+        <section id="Ethics Statement">
+            <h2>Ethics Statement</h2>
+            <p>Our work on single-image and audio-driven human video generation has potential applications in entertainment, education, and assistive technologies. However, we acknowledge the risks of misuse, such as generating deceptive deepfakes, infringing on privacy, or amplifying biases. We advocate for responsible development, encourage transparency in synthetic media, and urge users to adhere to ethical guidelines. By addressing these concerns, we aim to promote beneficial uses of this technology while mitigating its harmful impacts.            </p>
+        </section>
+        
+        <!-- <section id="acknowledgements">
+            <h2>Acknowledgements</h2>
+            <p>We thank the anonymous reviewers for their constructive feedback. This work was supported by the National Science Foundation under Grant No. XXXXXXX and a research gift from YYY Company.</p>
+        </section> -->
+    </div>
+    
+    <footer>
+        <!-- <div class="container">
+            <p>&copy; 2024 Your Research Group. All rights reserved.</p>
+            <p>Last updated: June 2024</p>
+        </div> -->
+    </footer>
+</body>
+</html>
